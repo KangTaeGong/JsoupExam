@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:fragment="header" class = "header" id="category_header">
+        <div class="logo">
+            <span>LOGO</span>
+        </div>
+        <ul class="nav">
+            <li><a th:href="@{/}">HOME</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Service</a></li>
+            <li><a th:href="@{/community/list}">Community</a></li>
+            <li>
+<!--                <div sec:authorize="isAnonymous()">-->
+                <a href="#" th:href="@{/login}" th:if="${user == null}">Login</a> <!--th:if="${user == null}"-->
+<!--                </div>-->
+            </li>
+            <li>
+<!--                <div sec:authorize="isAuthenticated()">-->
+<!--                    <span th:text="|${user.userName} 님|" th:if="${user != null}">사용자 이름</span> &lt;!&ndash;th:if="${user != null}"&ndash;&gt;-->
+                <label th:text="|${user.userName} 님|" th:if="${user != null}">사용자 이름></label>
+<!--                </div>-->
+            </li>
+            <li>
+<!--                <div sec:authorize="isAuthenticated()">-->
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="로그아웃" id="logout_btn" th:if="${user != null}"> <!-- th:if="${user != null}"-->
+                    </form>
+<!--                </div>-->
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

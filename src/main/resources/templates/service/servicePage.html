@@ -1,0 +1,50 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/service_style.css">
+        <link rel="stylesheet" type="text/css" href="/css/common.css">
+    </head>
+    <body>
+        <div th:replace="~{header :: header}"></div>
+            <div class = "service_page">
+                <div class = "service_form">
+                    <div class="search_area">
+                        <form>
+                            <div class="search_function">
+                                <input type="search" id="search_block" placeholder="검색어를 입력하세요.">
+                                <input type="submit" id="search_btn" value="검색">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="title"><h1>검색어 제목</h1></div>
+                    <div class = "info_area">
+                        <img id="service_picture">
+                        <div class = result_info>
+                            <div class = "info_since">
+                                <span>개봉 연도: </span>
+                                <b><span>2022</span></b>
+                            </div>
+                            <div class = "info_director">
+                                <span>감독: </span>
+                                <b><span>홍길동</span></b>
+                            </div>
+                            <div class = "info_actor">
+                                <span>출연진: </span>
+                                <b><span>홍길동</span></b>
+                            </div>
+                            <div class = "info_review">
+                                <span>평점: </span>
+                                <b><span>10</span></b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "review_area">
+                        <tr th:each="html : ${reporter_html}">
+                            <p th:text="${html}"></p>
+                        </tr>
+                    </div>
+                </div>
+            </div>
+    </body>
+</html>
