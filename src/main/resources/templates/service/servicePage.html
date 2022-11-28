@@ -39,11 +39,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class = "review_area">
-                        <tr th:each="html : ${reporter_html}">
-                            <p th:text="${html}"></p>
-                        </tr>
-                    </div>
+
+                        <script th:inline="javascript">
+                            document.write("<div class = 'review_area'>");
+<!--                            [# th:each="html : ${reporter_html}"]-->
+<!--                                document.write([[${html}]]);-->
+<!--                            [/]-->
+                            document.write([[${reporter_html}]]);
+                            document.write("</div>");
+                        </script>
+
                 </div>
             </div>
     </body>

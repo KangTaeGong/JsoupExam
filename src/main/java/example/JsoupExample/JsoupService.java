@@ -10,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @Slf4j
@@ -33,8 +31,6 @@ public class JsoupService {
         final String pointUrl = "https://movie.naver.com/movie/bi/mi/point.naver?code=201641";
         Connection pointConn = Jsoup.connect(pointUrl);
 
-        List<String> list = new ArrayList<>();
-
         try {
             Document document = conn.get();
             Document pointDocument = pointConn.get();
@@ -50,10 +46,12 @@ public class JsoupService {
             Elements reporterJobElements = pointDocument.select("dl.p_review > dt");
             Elements reporterCommentElements = pointDocument.select("dl.p_review > dd");
             Elements tx_reportElements = pointDocument.select("p.tx_report");
-            Elements reporterHtmlElements = pointDocument.select("div.reporter > ul > li");
+
+            // 기자, 평론가 html
+            Elements reporterHtmlElements = pointDocument.select("div.reporter");
+            String html = reporterHtmlElements.html();
+            model.addAttribute("reporter_html", html);
             for(int i = 0; i < reporterNameElements.size(); i++) {
-                String html = reporterHtmlElements.get(i).html();
-                log.info("기자, 평론가 관련 html = {}", html);
                 String reporter_name = reporterNameElements.get(i).text();
                 String reporter_info = reporterJobElements.get(i).text();
                 String reporter_job = getReporterJob(reporter_info, reporter_name);
@@ -63,12 +61,10 @@ public class JsoupService {
                 log.info("기자, 평론가 직업 = {}", reporter_job);
                 log.info("기자, 평론가 코멘트 = {}", reporter_comment);
                 log.info("기자, 평론가의 리플 = {}", reporter_reple);
-                list.add(html);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        model.addAttribute("reporter_html", list);
         return"service/servicePage";
     }
 
