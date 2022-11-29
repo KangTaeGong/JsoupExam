@@ -40,14 +40,14 @@
                         </div>
                     </div>
 
-                        <script th:inline="javascript">
-                            document.write("<div class = 'review_area'>");
-<!--                            [# th:each="html : ${reporter_html}"]-->
-<!--                                document.write([[${html}]]);-->
-<!--                            [/]-->
-                            document.write([[${reporter_html}]]);
-                            document.write("</div>");
-                        </script>
+                    <script th:inline="javascript">
+                        document.write("<div class = 'review_area'>");
+                    </script>
+
+                    <script>
+                        document.write([[${reporter_html}]]);
+                        document.write("</div>");
+                    </script>
 
                 </div>
             </div>
