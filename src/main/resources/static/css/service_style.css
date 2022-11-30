@@ -67,7 +67,7 @@ body {
 .info_area{
     display: flex;
     padding: 10px 0px 30px 70px;
-    border-bottom: 1px solid gray;
+    border-bottom: 3px solid #f2f2f2;
 }
 
 .result_info > div {
@@ -80,15 +80,89 @@ body {
 .review_area {
     background: #ffffff;
     margin-top: 20px;
-    /*border-top: 1px solid #bcbcbc;
-    border-bottom: 1px solid #bcbcbc;*/
+    padding: 0px 25px 20px 25px;
 }
 
-.ul {
+/*
+관람객 한줄평 리뷰 관련 css
+*/
+
+.score_board {
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 10px;
+}
+
+.board {
+    font-size: 15px;
+}
+
+.title {
+
+}
+
+.sp {
+    display: inline-block;
+    width: 1px;
+    padding: 0 11px 0 6px;
+    font-size: 15px;
+    font-weight: normal;
+    color: #dedede;
+    vertical-align: top;
+}
+
+.ico_more {
+    font-size: 15px;
+    vertical-align: top;
+    color: #ff6633;
+}
+
+.star_score {
+    float: left;
+    min-width: 94px;
+    height: 100%;
+    margin-right: 12px;
+}
+
+.score_result > ul > li {
+    position: relative;
+    float: none;
+    padding: 14px 0 13px 0;
+}
+
+.star_score > em {
+    padding-right: 5px;
+    color: #333;
+    letter-spacing: -1px;
+    font-weight: bold;
+    font-size: 18px;
+    vertical-align: top;
+}
+.star_image {
+    width: 80px;
+    height: 25px;
+}
+
+.score_reple {
+    display: inline-block;
+    width: 535px;
+    margin-left: 8px;
+}
+
+.score_reple > p {
+    font-size: 14px;
+    color: #333;
+    line-height: 22px;
+    margin-top: -2px;
+    word-break: break-all;
+}
+/*
+기자, 평론가 관련 css
+*/
+.reporter > ul {
     list-style: none;
 }
 
-.review_area > ul > li {
+.reporter > ul > li {
     padding: 20px 0 15px 0;
     border-top: 1px dashed gray;
 }

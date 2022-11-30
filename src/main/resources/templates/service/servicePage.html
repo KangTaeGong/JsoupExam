@@ -40,14 +40,42 @@
                         </div>
                     </div>
 
-                    <script th:inline="javascript">
-                        document.write("<div class = 'review_area'>");
-                    </script>
+                    <div class="review_area">
+                        <div class="score_board">
+                            <strong class="board">
+                                <span class="title">
+                                    <em class="blind">관람객 한줄평</em>
+                                </span>
+                                <span class="sp">|</span>
+                                <a href="https://movie.naver.com/movie/bi/mi/point.naver?code=201641#tab" class="link_more">
+                                    더보기
+                                    <span class="ico_more"> ></span>
+                                </a>
+                            </strong>
+                        </div>
+                        <div class="score_result">
+                            <ul>
+                                <li  th:each="result : ${result_list}">
+                                    <div class="star_score">
+                                        <img class="star_image" th:src="@{img/} + ${result.score_image} + '.jpg'">
+                                        <em th:text="${result.score_image}"></em>
+                                    </div>
 
-                    <script>
-                        document.write([[${reporter_html}]]);
-                        document.write("</div>");
-                    </script>
+                                    <div class="score_reple">
+                                        <p th:text="${result.reple_text}"></p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--기자, 평론가 html-->
+                        <div class="reporter">
+                            <script th:inline="javascript">
+                                document.write([[${reporter_html}]]);
+                            </script>
+                        </div>
+                    </div>
+
+
 
                 </div>
             </div>

@@ -1,5 +1,6 @@
 package example.JsoupExample;
 
+import example.JsoupExample.dto.ResultDto;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -10,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -31,46 +34,34 @@ public class JsoupService {
         final String pointUrl = "https://movie.naver.com/movie/bi/mi/point.naver?code=201641";
         Connection pointConn = Jsoup.connect(pointUrl);
 
+        List<ResultDto> result_list = new ArrayList<>();
         try {
             Document document = conn.get();
             Document pointDocument = pointConn.get();
 
             // 영화 기본 링크에서 가져올 수 있는 한줄평(5개)
             Elements conElements = document.select("div.score_reple > p");
+            Elements scoreElements = document.select("div.score_result > ul > li > div.star_score > em");
+
             for(int i = 0; i < conElements.size(); i++) {
                 String text = conElements.get(i).text();
+                String score = scoreElements.get(i).text();
                 log.info("한줄평 = {}", text);
+                log.info("점수 = {}", score);
+                ResultDto result = new ResultDto(score, text);
+                result_list.add(result);
             }
 
-            Elements reporterNameElements = pointDocument.select("dl.p_review > dt > a");
-            Elements reporterJobElements = pointDocument.select("dl.p_review > dt");
-            Elements reporterCommentElements = pointDocument.select("dl.p_review > dd");
-            Elements tx_reportElements = pointDocument.select("p.tx_report");
+            model.addAttribute("result_list", result_list);
 
             // 기자, 평론가 html
             Elements reporterHtmlElements = pointDocument.select("div.reporter");
             String html = reporterHtmlElements.html();
             model.addAttribute("reporter_html", html);
-            for(int i = 0; i < reporterNameElements.size(); i++) {
-                String reporter_name = reporterNameElements.get(i).text();
-                String reporter_info = reporterJobElements.get(i).text();
-                String reporter_job = getReporterJob(reporter_info, reporter_name);
-                String reporter_comment = reporterCommentElements.get(i).text();
-                String reporter_reple = tx_reportElements.get(i).text();
-                log.info("기자, 평론가 이름 = {}", reporter_name);
-                log.info("기자, 평론가 직업 = {}", reporter_job);
-                log.info("기자, 평론가 코멘트 = {}", reporter_comment);
-                log.info("기자, 평론가의 리플 = {}", reporter_reple);
-            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
         return"service/servicePage";
-    }
-
-    // 기자, 평론가의 정보가 이름과 직업이 붙어있어 substring으로 이름부분만 제거해서 리턴
-    private String getReporterJob(String reporter_info, String reporter_name) {
-        String str = reporter_info.substring(reporter_name.length());
-        return str;
     }
 }
