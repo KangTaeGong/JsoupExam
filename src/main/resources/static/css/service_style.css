@@ -117,6 +117,9 @@ body {
 }
 
 .star_score {
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
     float: left;
     min-width: 94px;
     height: 100%;
@@ -127,6 +130,8 @@ body {
     position: relative;
     float: none;
     padding: 14px 0 13px 0;
+    margin: 10px 0px 20px 0px;
+    margin-bottom: 20px;
 }
 
 .star_score > em {
@@ -143,8 +148,6 @@ body {
 }
 
 .score_reple {
-    display: inline-block;
-    width: 535px;
     margin-left: 8px;
 }
 
@@ -153,7 +156,6 @@ body {
     color: #333;
     line-height: 22px;
     margin-top: -2px;
-    word-break: break-all;
 }
 /*
 기자, 평론가 관련 css
@@ -164,7 +166,7 @@ body {
 
 .reporter > ul > li {
     padding: 20px 0 15px 0;
-    border-top: 1px dashed gray;
+    border-bottom: 1px dashed gray;
 }
 
 .reporter_line {
@@ -209,12 +211,6 @@ body {
     height: 20px;
     line-height: 20px;
     margin-left: 58px;
-}
-
-.star_score {
-    font-size: 16px;
-    color: #333;
-    font-weight: bold;
 }
 
 .tx_report {

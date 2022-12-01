@@ -30,8 +30,12 @@ public class JsoupService {
 
         final String movieUrl = "https://movie.naver.com/movie/bi/mi/basic.naver?code=201641";
         Connection conn = Jsoup.connect(movieUrl);
-
-        final String pointUrl = "https://movie.naver.com/movie/bi/mi/point.naver?code=201641";
+        
+        /*
+        * 기본 영화 URL은 제공받기 때문에 거기서 특정 부분만 수정하여 리뷰 페이지 링크를 제작
+        * 관람객 한줄평 더보기 링크에 걸어줌
+        * */
+        String pointUrl = movieUrl.replace("basic", "point");
         Connection pointConn = Jsoup.connect(pointUrl);
 
         List<ResultDto> result_list = new ArrayList<>();
